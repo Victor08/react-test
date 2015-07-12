@@ -8,6 +8,9 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+var template = express.static(path.join(__dirname, 'views'));
+var staticFiles = express.static(path.join(__dirname, 'public'));
+
 var app = express();
 
 // view engine setup
@@ -24,6 +27,8 @@ app.use(cookieParser());
 
 
 app.use('/users', users);
+app.use('/static', staticFiles);
+app.use('/template', template);
 app.use('*', routes);
 
 // catch 404 and forward to error handler
