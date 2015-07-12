@@ -1,0 +1,34 @@
+{
+  "name": "react-test",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "NODE_ENV=development nodemon --debug ./bin/www"
+  },
+  "devDependencies": {
+    "bower": "^1.3.1",
+    "fs": "*",
+    "gulp": "*",
+    "gulp-less": "*",
+    "gulp-plumber": "*",
+    "gulp-sourcemaps": "*",
+    "http-server": "^0.6.1",
+    "merge-stream": "~0.1.7",
+    "node-inspector": "0.10.1",
+    "nodemon": "1.3.7",
+    "util": "^0.10.3"
+  },
+  "dependencies": {
+    "body-parser": "~1.12.0",
+    "cookie-parser": "~1.3.4",
+    "debug": "~2.1.1",
+    "express": "^4.12.3",
+    "moment": "^2.10.3",
+    "morgan": "~1.5.1",
+    "oauth-client": "^0.3.0",
+    "q": "^1.4.1",
+    "serve-favicon": "~2.2.0",
+    "twig": "^0.8.2",
+    "twitter": "^1.2.5"
+  }
+}
