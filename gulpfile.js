@@ -7,7 +7,8 @@ var gulp          = require('gulp'),
     sourcemaps    = require('gulp-sourcemaps'),
     _             = require('lodash'),
     fs            = require('fs'),
-    merge         = require('merge-stream');
+    merge         = require('merge-stream'),
+    babel         = require('gulp-babel');
 
 
 /**
@@ -15,6 +16,7 @@ var gulp          = require('gulp'),
  */
 var resources     = './resources',
     public_css    = './public/stylesheets',
+    public_js     = './public/javascripts',
     public_vendor = './public/vendor';
 
 gulp.task('default', function () {
@@ -48,4 +50,13 @@ gulp.task('public', function () {
     }));
 
     return merge(tasks);
+});
+
+gulp.task('js', function() {
+    return gulp.src(resources + '/js/**/*.js')
+        .pipe(plumber())
+    .pipe(sourcemaps.init())
+    .pipe(babel())
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest(public_js));
 });
