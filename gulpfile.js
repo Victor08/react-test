@@ -8,7 +8,8 @@ var gulp          = require('gulp'),
     _             = require('lodash'),
     fs            = require('fs'),
     merge         = require('merge-stream'),
-    babel         = require('gulp-babel');
+    babel         = require('gulp-babel'),
+    browserify    = require('gulp-browserify');
 
 
 /**
@@ -26,7 +27,7 @@ gulp.task('default', function () {
 /**
  * Tasks
  */
-gulp.task('default',['less','public'], function () {
+gulp.task('default',['public', 'less', 'js'], function () {
     gulp.watch(resources + '/less/**/*.less', ['less']);
 });
 gulp.task('less', function () {
@@ -55,8 +56,8 @@ gulp.task('public', function () {
 gulp.task('js', function() {
     return gulp.src(resources + '/js/**/*.js')
         .pipe(plumber())
-    .pipe(sourcemaps.init())
-    .pipe(babel())
-    .pipe(sourcemaps.write())
-    .pipe(gulp.dest(public_js));
+        .pipe(browserify({
+            transform: ['babelify', 'reactify', 'envify']
+        }))
+        .pipe(gulp.dest(public_js));
 });

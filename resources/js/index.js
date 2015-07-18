@@ -1,52 +1,16 @@
-var FilteredList = React.createClass({
-    filterList: function(event){
-        var updatedList = this.state.initialItems;
-        updatedList = updatedList.filter((item) => {
-            return item.toLowerCase().search(
-                    event.target.value.toLowerCase()) !== -1;
-        });
-        this.setState({items: updatedList});
-    },
-    getInitialState: function(){
-        return {
-            initialItems: [
-                "Apples",
-                "Broccoli",
-                "Chicken",
-                "Duck",
-                "Eggs",
-                "Fish",
-                "Granola",
-                "Hash Browns"
-            ],
-            items: []
-        }
-    },
-    componentWillMount: function(){
-        this.setState({items: this.state.initialItems})
-    },
-    render: function(){
-        return (
-            <div className="filter-list">
-                <input type="text" placeholder="Search" onChange={this.filterList}/>
-                <List items={this.state.items}/>
-            </div>
-        );
-    }
+window.React = require('react');
+
+var TweetAPI = require('./utils/TweetAPI');
+var FluxTweetApp = require('./components/FluxTweetApp.react');
+
+
+TweetAPI.getTweetData('/api/statuses/user_timeline', {
+    count: 10,
+    screen_name: imtiredofthinki
 });
 
-var List = React.createClass({
-    render: function(){
-        return (
-            <ul>
-      {
-          this.props.items.map((item) => {
-              return <li key={item}>{item}</li>
-          })
-          }
-            </ul>
-        )
-    }
-});
-
-React.render(<FilteredList/>, document.getElementById('mount-point'));
+// Render FluxCartApp Controller View
+React.render(
+    <FluxTweetApp />,
+    document.getElementById('flux-tweets')
+);
