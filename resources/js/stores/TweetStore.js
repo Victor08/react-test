@@ -52,7 +52,6 @@ AppDispatcher.register(function(payload){
 
         case FluxTweetConstants.TWEET_REMOVE:
 
-
         default:
             return true;
     }

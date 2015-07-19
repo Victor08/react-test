@@ -5,7 +5,7 @@ var FluxTweetConstants = require('../constants/FluxTweetConstants');
 var FluxTweetActions = {
 
     // Receive inital product data
-    receiveProduct: function(data) {
+    receiveTweets: function(data) {
         AppDispatcher.handleAction({
             actionType: FluxTweetConstants.RECEIVE_DATA,
             data: data

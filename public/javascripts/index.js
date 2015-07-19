@@ -48,6 +48,6 @@ var List = React.createClass({
     }
 });
 
-React.render(React.createElement(FilteredList, null), document.getElementById("mount-point"));
+React.render(React.createElement(FilteredList, null), document.getElementById("flux-tweets"));
 
 },{}]},{},[1])
