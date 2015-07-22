@@ -1,4 +1,4 @@
-var FluxCartActions = require('../actions/FluxCartActions');
+var FluxCartActions = require('../actions/FluxTweetlistActions');
 
 module.exports = {
 

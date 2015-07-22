@@ -29,9 +29,10 @@ gulp.task('default', function () {
  */
 gulp.task('default',['public', 'less', 'js'], function () {
     gulp.watch(resources + '/less/**/*.less', ['less']);
+    gulp.watch(resources + '/js/**/*.js', ['js']);
 });
 gulp.task('less', function () {
-    return gulp.src(resources + '/less/index.less')
+    return gulp.src(resources + '/less/react-test.less')
         .pipe(plumber())
         .pipe(sourcemaps.init())
         .pipe(less({compress: true, sourceMap: true}))
@@ -54,10 +55,11 @@ gulp.task('public', function () {
 });
 
 gulp.task('js', function() {
-    return gulp.src(resources + '/js/**/*.js')
+    return gulp.src(resources + '/js/**/*.js', {read: false})
         .pipe(plumber())
         .pipe(browserify({
-            transform: ['babelify', 'reactify', 'envify']
+            transform: ['babelify', 'reactify', 'envify'],
+            debug: !gulp.env.production
         }))
         .pipe(gulp.dest(public_js));
 });

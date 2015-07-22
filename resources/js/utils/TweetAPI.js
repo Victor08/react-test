@@ -1,12 +1,13 @@
 
-var FluxCartActions = require('../actions/FluxCartActions');
+var FluxTweetlistActions = require('../actions/FluxTweetlistActions');
 
 module.exports = {
 
     getTweetData: function(url, params) {
         $.get(url, params, function(data){
-            let response = JSON.parse(data);
-            FluxTweetlistActions.receiveTweets(response.tweets);
+            if (data.status === 'OK'){
+                FluxTweetlistActions.receiveTweets(data.tweets);
+            }
         });
     }
 };
