@@ -4,6 +4,13 @@ var FluxTweetConstants = require('../constants/FluxTweetConstants');
 // Define actions object
 var FluxTweetActions = {
 
+    loadTweets: function(data) {
+        AppDispatcher.handleAction({
+            actionType: FluxTweetConstants.LOAD_TWEETS,
+                data: data
+        })
+    },
+
     // Receive inital product data
     receiveTweets: function(data) {
         AppDispatcher.handleAction({
@@ -13,10 +20,17 @@ var FluxTweetActions = {
     },
 
     // Set currently selected product variation
-    addTweet: function(index) {
+    addTweet: function(text) {
         AppDispatcher.handleAction({
             actionType: FluxTweetConstants.TWEET_ADD,
-            data: index
+            data: text
+        })
+    },
+
+    addedTweet: function(data) {
+        AppDispatcher.handleAction({
+            actionType: FluxTweetConstants.TWEET_ADDED,
+            data: data
         })
     },
 

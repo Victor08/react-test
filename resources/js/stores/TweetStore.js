@@ -20,6 +20,14 @@ function removeTweet(id){
     })
 }
 
+function postNewTweet(text){
+
+}
+
+function getTweets() {
+
+}
+
 var TweetStore = _.extend({}, EventEmitter.prototype, {
 
     getTweets: function(){
@@ -48,6 +56,10 @@ AppDispatcher.register(function(payload){
         // Respond to RECEIVE_DATA action
         case FluxTweetConstants.RECEIVE_DATA:
             loadTweetsData(action.data);
+            break;
+
+        case FluxTweetConstants.TWEET_ADD:
+            postNewTweet(action.data);
             break;
 
         case FluxTweetConstants.TWEET_REMOVE:

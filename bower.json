@@ -15,7 +15,8 @@
   ],
   "dependencies": {
     "react": "~0.13.3",
-    "lodash": "~3.10.0"
+    "lodash": "~3.10.0",
+    "bootstrap": "~3.3.5"
   },
   "public": {
     "react": [

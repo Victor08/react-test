@@ -1,5 +1,6 @@
 window.React = require('react');
 window.$ = require('jquery');
+window._ = require('lodash');
 
 var TweetAPI = require('./utils/TweetAPI');
 var FluxTweetApp = require('./components/FluxTweetApp.react');
