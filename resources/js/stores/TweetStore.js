@@ -1,20 +1,15 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
 var FluxTweetConstants = require('../constants/FluxTweetConstants');
-var TweetAPI = require('../utils/TweetAPI');
-
-var _ = require('lodash');
 
 var _tweets = {};
 
 function loadTweetsData(data){
     _tweets = data;
-    console.log('now tweets in store', _tweets);
 }
 
-
-function removeTweet(id){
-   TweetAPI.removeTweet(id);
+function removeTweet(key){
+    delete _tweets[key];
 }
 
 function showNewTweet(newTweet){
@@ -24,10 +19,6 @@ function showNewTweet(newTweet){
     }, alteredTweets );
     alteredTweets[0] = newTweet;
     _tweets = alteredTweets;
-}
-
-function getTweets() {
-
 }
 
 var TweetStore = _.extend({}, EventEmitter.prototype, {
@@ -65,6 +56,8 @@ AppDispatcher.register(function(payload){
             break;
 
         case FluxTweetConstants.TWEET_REMOVE:
+            removeTweet(action.data);
+            break;
 
         default:
             return true;

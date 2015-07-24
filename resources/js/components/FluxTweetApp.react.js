@@ -2,6 +2,7 @@ var React = require('react');
 var TweetStore = require('../stores/TweetStore');
 var FluxTweetInput = require('./FluxTweetInput.react');
 var FluxTweet = require('./FluxTweet.react');
+var TweetApi = require('./utils/TweetAPI');
 
 
 function getTweetsState() {
@@ -17,12 +18,13 @@ var FluxTweetApp = React.createClass({
 
     componentDidMount: function(){
         TweetStore.addChangeListener(this._onChange);
+        TweetApi.loadTweets();
     },
 
     render: function() {
         var tweets = [];
         _.each(this.state.tweets, function(tweet, key){
-             tweets.push(<FluxTweet name={ tweet.user.name } text={ tweet.text } date={ tweet.created_at } />)
+             tweets.push(<FluxTweet name={ tweet.user.name } text={ tweet.text } date={ tweet.created_at } tweetid={ tweet.id_str } storeKey={ key } />)
         });
 
         return (

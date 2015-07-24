@@ -15,7 +15,6 @@ var FluxTweetInput = React.createClass({
     },
 
     setNewTweet: function(e){
-        console.log(e.target.value);
         this.setState({
             newTweet: e.target.value
         });

@@ -34,10 +34,10 @@ var FluxTweetActions = {
         })
     },
 
-    removeTweet: function(index) {
+    removeTweet: function(id) {
         AppDispatcher.handleAction({
             actionType: FluxTweetConstants.TWEET_REMOVE,
-            data: index
+            data: id
         })
     }
 

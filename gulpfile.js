@@ -28,6 +28,7 @@ gulp.task('default', function () {
 /**
  * Tasks
  */
+
 gulp.task('default',['public', 'less', 'js'], function () {
     browserSync({
         port: 8080,
@@ -40,6 +41,7 @@ gulp.task('default',['public', 'less', 'js'], function () {
     gulp.watch(resources + '/less/**/*.less', ['less', browserSync.reload]);
     gulp.watch(resources + '/js/**/*.js', ['js', browserSync.reload]);
 });
+
 gulp.task('less', function () {
     return gulp.src(resources + '/less/react-test.less')
         .pipe(plumber())

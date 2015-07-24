@@ -27,10 +27,10 @@ module.exports = {
         })
     },
 
-    removeTweet: function (id){
+    removeTweet: function (id, key){
         $.get('/api/statuses/destroy/' + id, {}, function(data){
             if (data.status === 'OK') {
-                FluxTweetlistActions.removeTweet(data.tweet.id);
+                FluxTweetlistActions.removeTweet(key);
             }
         })
     }

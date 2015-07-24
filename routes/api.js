@@ -51,7 +51,7 @@ router.get('*', function(req, res, next){
     if (url.match(/^\/statuses\/destroy/)) {
         client.post(urlParsed.pathname, function(error, tweets, response) {
             if (response.statusMessage === 'OK') {
-                res.send({status: 'OK'})
+                res.send({status: 'OK', tweets: tweets})
             }
             if(error) {
                 res.send({status: 'ERR', message: error})
