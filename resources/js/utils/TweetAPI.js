@@ -22,7 +22,7 @@ module.exports = {
     loadTweets: function() {
         $.get('/api/statuses/user_timeline', {count: 10, screen_name: 'imtiredofthinki'}, function(data){
             if (data.status === 'OK') {
-                FluxTweetlistActions.loadTweets(data);
+                FluxTweetlistActions.receiveTweets(data);
             }
         })
     },

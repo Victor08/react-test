@@ -8,20 +8,22 @@ var _ = require('lodash');
 var _tweets = {};
 
 function loadTweetsData(data){
-    _tweets = data
+    _tweets = data;
+    console.log('now tweets in store', _tweets);
 }
 
 
 function removeTweet(id){
-    $.get('/api/statuses/destroy/' + id, {}, function(data){
-        if (data.status === 'OK') {
-            loadTweetsData();
-        }
-    })
+   TweetAPI.removeTweet(id);
 }
 
-function postNewTweet(text){
-
+function showNewTweet(newTweet){
+    var alteredTweets = {};
+    _.transform(_tweets, function prependTweets(acc, val, key){
+        acc[key + 1] = val;
+    }, alteredTweets );
+    alteredTweets[0] = newTweet;
+    _tweets = alteredTweets;
 }
 
 function getTweets() {
@@ -59,7 +61,7 @@ AppDispatcher.register(function(payload){
             break;
 
         case FluxTweetConstants.TWEET_ADD:
-            postNewTweet(action.data);
+            showNewTweet(action.data.tweets);
             break;
 
         case FluxTweetConstants.TWEET_REMOVE:
