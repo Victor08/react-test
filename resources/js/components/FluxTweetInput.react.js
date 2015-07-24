@@ -1,5 +1,6 @@
 var React = require('react');
 var FluxTweetActions = require('../actions/FluxTweetlistActions');
+var TweetApi = require('../utils/TweetAPI');
 
 
 var FluxTweetInput = React.createClass({
@@ -10,7 +11,7 @@ var FluxTweetInput = React.createClass({
     },
 
     postTweet: function(){
-        FluxTweetActions.addTweet(this.state.newTweet)
+        TweetApi.postNewTweet(this.state.newTweet);
     },
 
     setNewTweet: function(e){

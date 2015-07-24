@@ -20,7 +20,7 @@ function removeTweet(id){
 function showNewTweet(newTweet){
     var alteredTweets = {};
     _.transform(_tweets, function prependTweets(acc, val, key){
-        acc[key + 1] = val;
+        acc[Number(key) + 1] = val;
     }, alteredTweets );
     alteredTweets[0] = newTweet;
     _tweets = alteredTweets;
@@ -60,7 +60,7 @@ AppDispatcher.register(function(payload){
             loadTweetsData(action.data);
             break;
 
-        case FluxTweetConstants.TWEET_ADD:
+        case FluxTweetConstants.TWEET_ADDED:
             showNewTweet(action.data.tweets);
             break;
 

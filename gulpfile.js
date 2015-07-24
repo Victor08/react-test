@@ -9,7 +9,8 @@ var gulp          = require('gulp'),
     fs            = require('fs'),
     merge         = require('merge-stream'),
     babel         = require('gulp-babel'),
-    browserify    = require('gulp-browserify');
+    browserify    = require('gulp-browserify'),
+    browserSync = require('browser-sync');
 
 
 /**
@@ -28,8 +29,16 @@ gulp.task('default', function () {
  * Tasks
  */
 gulp.task('default',['public', 'less', 'js'], function () {
-    gulp.watch(resources + '/less/**/*.less', ['less']);
-    gulp.watch(resources + '/js/**/*.js', ['js']);
+    browserSync({
+        port: 8080,
+        proxy: 'localhost:3000',
+        tunnel: true,
+        ui: {
+            port: 8081
+        }
+    });
+    gulp.watch(resources + '/less/**/*.less', ['less', browserSync.reload]);
+    gulp.watch(resources + '/js/**/*.js', ['js', browserSync.reload]);
 });
 gulp.task('less', function () {
     return gulp.src(resources + '/less/react-test.less')
