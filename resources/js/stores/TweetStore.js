@@ -48,7 +48,7 @@ AppDispatcher.register(function(payload){
 
         // Respond to RECEIVE_DATA action
         case FluxTweetConstants.RECEIVE_DATA:
-            loadTweetsData(action.data);
+            loadTweetsData(action.data.tweets);
             break;
 
         case FluxTweetConstants.TWEET_ADDED:
