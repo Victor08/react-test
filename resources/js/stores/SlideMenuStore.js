@@ -1,6 +1,6 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
-var FluxSlideMenuConstants = require('../constants/FluxTweetConstants');
+var FluxSlideMenuConstants = require('../constants/FluxSlideMenuConstants');
 
 let _items = {};    // the object of menu items
 let _visible;       // bool, reflecting menu visibility
@@ -16,38 +16,45 @@ function switchVisibility(bool) {
     }
 }
 
+function setItems(items) {
+    _items = items;
+}
+
 function setSelectedItem(id) {
     _selected = id;
 }
 
-class SliderMenuStore extends EventEmitter {
+var SlideMenuStore = _.extend({}, EventEmitter.prototype, {
 
-    getItems(){
+
+    getItems: function(){
         return _items;
-    }
+    },
 
-    getSelected(){
+    getSelected: function(){
         return _selected;
-    }
+    },
 
-    getVisible(){
+    getVisible: function(){
         return _visible;
-    }
+    },
 
-    emitChange(){
+    emitChange: function(){
         this.emit('change');
-    }
+    },
 
-    addChangeListener(callback) {
+    addChangeListener: function(callback) {
+        //console.log('adding change listeneer to', this, 'func', callback);
         this.on('change', callback);
-    }
+    },
 
-    removeChangeListener(callback) {
+    removeChangeListener: function(callback) {
         this.removeListener('change', callback);
     }
-}
+});
 
 AppDispatcher.register((payload) => {
+    console.log('act disp', payload);
     let action = payload.action;
 
     switch(action.actionType) {
@@ -57,14 +64,20 @@ AppDispatcher.register((payload) => {
 
         case FluxSlideMenuConstants.SET_SELECTED:
             setSelectedItem(action.data);
+
+            break;
+
+        case FluxSlideMenuConstants.RECEIVE_ITEMS:
+            console.log('iv gote action data', action.data);
+            setItems(action.data);
             break;
 
         default :
             return true;
     }
 
-    SliderMenuStore.emitChange();
+    SlideMenuStore.emitChange();
     return true;
 });
 
-module.exports = SliderMenuStore;
+module.exports = SlideMenuStore;

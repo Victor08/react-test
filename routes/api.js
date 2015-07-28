@@ -58,6 +58,12 @@ router.get('*', function(req, res, next){
             }
         })
     }
+
+    if (url.match(/^\/.*\.json$/)) {
+        var json = require('../dataSets/' + urlParsed.path);
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify({ status: 'OK', data: json}));
+    }
 });
 
 module.exports = router;

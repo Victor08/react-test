@@ -1,5 +1,5 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
-var FluxSlideMenuConstants = require('../constants/FluxTweetConstants');
+var FluxSlideMenuConstants = require('../constants/FluxSlideMenuConstants');
 
 let FluxSlideMenuActions = {
 
@@ -15,9 +15,15 @@ let FluxSlideMenuActions = {
             actionType: FluxSlideMenuConstants.SET_SELECTED,
             data: itemId
         })
+    },
+
+    receiveItems: function(items) {
+        AppDispatcher.handleAction(({
+            actionType: FluxSlideMenuConstants.RECEIVE_ITEMS,
+            data: items
+        }))
     }
 
 };
-
 
 module.exports = FluxSlideMenuActions;

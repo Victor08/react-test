@@ -32,6 +32,7 @@ var TweetStore = _.extend({}, EventEmitter.prototype, {
     },
 
     addChangeListener: function(callback) {
+        //console.log('adding change listeneer to', this, 'func', callback);
         this.on('change', callback);
     },
 
