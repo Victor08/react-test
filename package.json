@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "NODE_ENV=development nodemon --debug ./bin/www",
-    "build": "browserify . | uglifyjs -cm > js/bundle.min.js"
+    "build": "browserify . | uglifyjs -cm > js/bundle.min.js",
+    "test": "jest"
   },
   "main": "js/app.js",
   "devDependencies": {
@@ -21,6 +22,7 @@
     "gulp-plumber": "*",
     "gulp-sourcemaps": "*",
     "http-server": "^0.6.1",
+    "jest-cli": "^0.4.17",
     "merge-stream": "~0.1.7",
     "node-inspector": "0.10.1",
     "nodemon": "1.3.7",

@@ -10,16 +10,13 @@ var FluxSlideMenu = require('./slideMenu/FluxSlideMenu.react');
 
 
 function getTweetsState() {
-    console.log('tw state', TweetStore.getTweets());
     return {
-        tweets: TweetStore.getTweets(),
-        menuItems: SlideMenuStore.getItems()
+        tweets: TweetStore.getTweets()
     };
 }
 
 var FluxTweetApp = React.createClass({
     getInitialState: function(){
-        console.log('get state', getTweetsState());
         return getTweetsState();
     },
 

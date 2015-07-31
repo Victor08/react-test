@@ -1,13 +1,16 @@
 {
   "0": {
+    "id": "0",
     "title": "History",
     "href": "history"
   },
   "1": {
+    "id": "1",
     "title": "News",
     "href": "news"
   },
   "2": {
+    "id": "2",
     "title": "Contacts",
     "href": "contacts"
   }

@@ -5,8 +5,8 @@ let BaseComponent = require('../BaseComponent.react');
 class FluxSlideMenu extends BaseComponent {
     constructor(props) {
         super(props);
-        this._bind('_onChange');
-        this.state = { items: props.items, selected: props.selected }
+        this._bind('_onChange', 'render');
+        this.state = { items: SlideMenuStore.getItems(), selected: '0' }
     }
 
     componentDidMount(){
@@ -14,29 +14,27 @@ class FluxSlideMenu extends BaseComponent {
     }
 
     _onChange(){
-        console.log('now items are', SlideMenuStore.getItems());
         this.setState({
             items: SlideMenuStore.getItems(),
             selected: SlideMenuStore.getSelected()
         })
-        console.log('this state', this.state);
     }
 
     render() {
+        console.log('rendering slide menu');
+        var that = this;
         let items = [];
 
-        _.each(this.state.items, (item, key) => {
+        _.each(this.state.items, function(item, key) {
             items.push(
-                <FluxSlideMenuLink selected={item.id === this.state.selected ? true : false} href={ item.href } title={ item.title } />
+                <FluxSlideMenuLink selected={item.id == that.state.selected ? true : false} href={ item.href } title={ item.title } />
             )
         });
-        console.log('items fff', items);
 
         return (
-            <ul className="nav nav-stacked">
+            <ul className="nav nav-pills nav-stacked">
                 {items}
             </ul>
-
         )
     }
 }

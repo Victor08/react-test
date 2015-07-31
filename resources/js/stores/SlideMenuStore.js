@@ -4,7 +4,7 @@ var FluxSlideMenuConstants = require('../constants/FluxSlideMenuConstants');
 
 let _items = {};    // the object of menu items
 let _visible;       // bool, reflecting menu visibility
-let _selected;      // selected item id
+let _selected = 0;      // selected item id
 
 function switchVisibility(bool) {
     if (bool) {
@@ -54,7 +54,6 @@ var SlideMenuStore = _.extend({}, EventEmitter.prototype, {
 });
 
 AppDispatcher.register((payload) => {
-    console.log('act disp', payload);
     let action = payload.action;
 
     switch(action.actionType) {
@@ -64,11 +63,9 @@ AppDispatcher.register((payload) => {
 
         case FluxSlideMenuConstants.SET_SELECTED:
             setSelectedItem(action.data);
-
             break;
 
         case FluxSlideMenuConstants.RECEIVE_ITEMS:
-            console.log('iv gote action data', action.data);
             setItems(action.data);
             break;
 
