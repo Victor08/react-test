@@ -8,9 +8,8 @@ var gulp          = require('gulp'),
     _             = require('lodash'),
     fs            = require('fs'),
     merge         = require('merge-stream'),
-    babel         = require('gulp-babel'),
     browserify    = require('gulp-browserify'),
-    browserSync = require('browser-sync');
+    browserSync   = require('browser-sync');
 
 
 /**
