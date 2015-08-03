@@ -1,6 +1,7 @@
-var AppDispatcher = require('../dispatcher/AppDispatcher');
-var EventEmitter = require('events').EventEmitter;
-var FluxSlideMenuConstants = require('../constants/FluxSlideMenuConstants');
+let AppDispatcher = require('../dispatcher/AppDispatcher');
+let EventEmitter = require('events').EventEmitter;
+let FluxSlideMenuConstants = require('../constants/FluxSlideMenuConstants');
+let _ = require('lodash');
 
 let _items = {};    // the object of menu items
 let _visible;       // bool, reflecting menu visibility
@@ -24,8 +25,7 @@ function setSelectedItem(id) {
     _selected = id;
 }
 
-var SlideMenuStore = _.extend({}, EventEmitter.prototype, {
-
+let SlideMenuStore = _.extend({}, EventEmitter.prototype, {
 
     getItems: function(){
         return _items;
@@ -44,7 +44,6 @@ var SlideMenuStore = _.extend({}, EventEmitter.prototype, {
     },
 
     addChangeListener: function(callback) {
-        //console.log('adding change listeneer to', this, 'func', callback);
         this.on('change', callback);
     },
 
@@ -53,9 +52,8 @@ var SlideMenuStore = _.extend({}, EventEmitter.prototype, {
     }
 });
 
-AppDispatcher.register((payload) => {
+AppDispatcher.register(function(payload) {
     let action = payload.action;
-
     switch(action.actionType) {
         case FluxSlideMenuConstants.MENU_TOGGLE :
             switchVisibility(action.data);

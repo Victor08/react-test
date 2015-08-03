@@ -11,7 +11,6 @@ var gulp          = require('gulp'),
     browserify    = require('gulp-browserify'),
     browserSync   = require('browser-sync');
 
-
 /**
  * Paths
  */
@@ -65,11 +64,11 @@ gulp.task('public', function () {
 });
 
 gulp.task('js', function() {
-    return gulp.src(resources + '/js/**/*.js', {read: false})
+    return gulp.src(resources + '/js/index.js', {read: false})
         .pipe(plumber())
         .pipe(browserify({
             transform: ['babelify', 'reactify', 'envify'],
-            debug: !gulp.env.production
+            debug: true
         }))
         .pipe(gulp.dest(public_js));
 });
