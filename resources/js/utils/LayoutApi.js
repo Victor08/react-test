@@ -1,4 +1,5 @@
-var FluxSlideMenuActions = require('../actions/FluxSlideMenuActions');
+let FluxSlideMenuActions = require('../actions/FluxSlideMenuActions');
+let $ = require('jquery');
 
 module.exports = {
     getMenuItems: function () {

@@ -1,15 +1,20 @@
 /**
  * Plugins
  */
-var gulp          = require('gulp'),
-    plumber       = require('gulp-plumber'),
-    less          = require('gulp-less'),
-    sourcemaps    = require('gulp-sourcemaps'),
-    _             = require('lodash'),
-    fs            = require('fs'),
-    merge         = require('merge-stream'),
-    browserify    = require('gulp-browserify'),
-    browserSync   = require('browser-sync');
+var gulp            = require('gulp'),
+    plumber         = require('gulp-plumber'),
+    less            = require('gulp-less'),
+    sourcemaps      = require('gulp-sourcemaps'),
+    _               = require('lodash'),
+    fs              = require('fs'),
+    merge           = require('merge-stream'),
+    browserify      = require('browserify'),
+    watchify        = require('watchify'),
+    source          = require('vinyl-source-stream'),
+    buffer          = require('vinyl-buffer'),
+    gutil           = require('gulp-util'),
+    notify          = require('gulp-notify'),
+    browserSync     = require('browser-sync');
 
 /**
  * Paths
@@ -19,9 +24,9 @@ var resources     = './resources',
     public_js     = './public/javascripts',
     public_vendor = './public/vendor';
 
-gulp.task('default', function () {
-    gulp.watch(resources + '/less/**/*.less', ['less']);
-});
+var browserifyOptions = _.assign({}, watchify.args, { entries: ['./resources/js/index.js'],debug: true, transform: ['babelify', 'reactify', 'envify']});
+
+
 
 /**
  * Tasks
@@ -37,7 +42,6 @@ gulp.task('default',['public', 'less', 'js'], function () {
         }
     });
     gulp.watch(resources + '/less/**/*.less', ['less', browserSync.reload]);
-    gulp.watch(resources + '/js/**/*.js', ['js', browserSync.reload]);
 });
 
 gulp.task('less', function () {
@@ -63,12 +67,23 @@ gulp.task('public', function () {
     return merge(tasks);
 });
 
-gulp.task('js', function() {
-    return gulp.src(resources + '/js/index.js', {read: false})
-        .pipe(plumber())
-        .pipe(browserify({
-            transform: ['babelify', 'reactify', 'envify'],
-            debug: true
-        }))
-        .pipe(gulp.dest(public_js));
+
+gulp.task('js', function(){
+
+    var bundleStream = watchify(browserify(browserifyOptions));
+    bundleStream.on('update', bundle); // on any dep update, runs the bundler
+    bundleStream.on('log', gutil.log); // output build logs to terminal
+
+    function bundle(){
+        return bundleStream.bundle()
+            .pipe(source('./index.js'))
+            .pipe(buffer())
+            .pipe(sourcemaps.init({loadMaps: true}))
+            .pipe(sourcemaps.write('./'))
+            .pipe(gulp.dest(public_js))
+            .pipe(browserSync.reload({stream: true}))
+            .pipe(notify({message: 'browsers reloaded after watchify', onLast: true}));
+    }
+
+    return bundle();
 });
