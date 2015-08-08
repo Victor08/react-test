@@ -4,7 +4,8 @@
 window.React = require('react');
 window.$ = require('jquery');
 window._ = require('lodash');
-var FluxTweetApp = require('./components/FluxTweetApp.react');
+//var FluxTweetApp = require('./components/FluxTweetApp.react');
+var Body = require('./components/layout/Body.react');
 
 var LayoutApi = require('./utils/LayoutApi');
 var TweetApi = require('./utils/TweetAPI');
@@ -13,9 +14,9 @@ LayoutApi.getMenuItems();
 TweetApi.loadTweets();
 console.log('fdsdsdfsdffdsl');
 // Render FluxCartApp Controller View
-React.render(React.createElement(FluxTweetApp, null), document.getElementById('flux-tweets'));
+React.render(React.createElement(Body, null), document.getElementById('root-element'));
 
-},{"./components/FluxTweetApp.react":"/Users/antonio/sites/react-test1/resources/js/components/FluxTweetApp.react.js","./utils/LayoutApi":"/Users/antonio/sites/react-test1/resources/js/utils/LayoutApi.js","./utils/TweetAPI":"/Users/antonio/sites/react-test1/resources/js/utils/TweetAPI.js","jquery":"/Users/antonio/sites/react-test1/node_modules/jquery/dist/jquery.js","lodash":"/Users/antonio/sites/react-test1/node_modules/lodash/index.js","react":"/Users/antonio/sites/react-test1/node_modules/react/react.js"}],"/Users/antonio/sites/react-test1/node_modules/browserify/node_modules/events/events.js":[function(require,module,exports){
+},{"./components/layout/Body.react":"/Users/antonio/sites/react-test1/resources/js/components/layout/Body.react.js","./utils/LayoutApi":"/Users/antonio/sites/react-test1/resources/js/utils/LayoutApi.js","./utils/TweetAPI":"/Users/antonio/sites/react-test1/resources/js/utils/TweetAPI.js","jquery":"/Users/antonio/sites/react-test1/node_modules/jquery/dist/jquery.js","lodash":"/Users/antonio/sites/react-test1/node_modules/lodash/index.js","react":"/Users/antonio/sites/react-test1/node_modules/react/react.js"}],"/Users/antonio/sites/react-test1/node_modules/browserify/node_modules/events/events.js":[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -42125,7 +42126,28 @@ module.exports = warning;
 },{"./emptyFunction":"/Users/antonio/sites/react-test1/node_modules/react/lib/emptyFunction.js","_process":"/Users/antonio/sites/react-test1/node_modules/browserify/node_modules/process/browser.js"}],"/Users/antonio/sites/react-test1/node_modules/react/react.js":[function(require,module,exports){
 module.exports = require('./lib/React');
 
-},{"./lib/React":"/Users/antonio/sites/react-test1/node_modules/react/lib/React.js"}],"/Users/antonio/sites/react-test1/resources/js/actions/FluxSlideMenuActions.js":[function(require,module,exports){
+},{"./lib/React":"/Users/antonio/sites/react-test1/node_modules/react/lib/React.js"}],"/Users/antonio/sites/react-test1/resources/js/actions/FluxLayoutActions.js":[function(require,module,exports){
+"use strict";
+var AppDispatcher = require('../dispatcher/AppDispatcher');
+var FluxLayoutConstants = require('../constants/FluxLayoutConstants');
+
+var FluxLayoutActions = {
+    wrapContent: function wrapContent(wrapped) {
+        AppDispatcher.handleAction({
+            actionType: FluxLayoutConstants.WRAP_CONTENT,
+            data: wrapped
+        });
+    },
+    toggleContentWrap: function toggleContentWrap() {
+        AppDispatcher.handleAction({
+            actionType: FluxLayoutConstants.TOGGLE_CONTENT_WRAP
+        });
+    }
+};
+
+module.exports = FluxLayoutActions;
+
+},{"../constants/FluxLayoutConstants":"/Users/antonio/sites/react-test1/resources/js/constants/FluxLayoutConstants.js","../dispatcher/AppDispatcher":"/Users/antonio/sites/react-test1/resources/js/dispatcher/AppDispatcher.js"}],"/Users/antonio/sites/react-test1/resources/js/actions/FluxSlideMenuActions.js":[function(require,module,exports){
 'use strict';
 
 var AppDispatcher = require('../dispatcher/AppDispatcher');
@@ -42339,7 +42361,7 @@ var FluxTweetApp = React.createClass({
             tweets.push(React.createElement(FluxTweet, { name: tweet.user.name, text: tweet.text, date: tweet.created_at, tweetid: tweet.id_str, storeKey: key }));
         });
 
-        return React.createElement('div', { className: 'row' }, React.createElement('div', { className: 'col-sm-12' }, React.createElement(MainHeader, { text: 'wake up neo' }), React.createElement(FluxSlideMenu, null), React.createElement(FluxTweetInput, null), tweets));
+        return React.createElement('div', { className: 'row' }, React.createElement('div', { className: 'col-sm-12' }, React.createElement(MainHeader, { text: 'wake up neo' }), React.createElement(FluxTweetInput, null), tweets));
     },
 
     _onChange: function _onChange() {
@@ -42382,7 +42404,170 @@ var FluxTweetInput = React.createClass({
 
 module.exports = FluxTweetInput;
 
-},{"../actions/FluxTweetlistActions":"/Users/antonio/sites/react-test1/resources/js/actions/FluxTweetlistActions.js","../utils/TweetAPI":"/Users/antonio/sites/react-test1/resources/js/utils/TweetAPI.js","react":"/Users/antonio/sites/react-test1/node_modules/react/react.js"}],"/Users/antonio/sites/react-test1/resources/js/components/layout/MainHeader.react.js":[function(require,module,exports){
+},{"../actions/FluxTweetlistActions":"/Users/antonio/sites/react-test1/resources/js/actions/FluxTweetlistActions.js","../utils/TweetAPI":"/Users/antonio/sites/react-test1/resources/js/utils/TweetAPI.js","react":"/Users/antonio/sites/react-test1/node_modules/react/react.js"}],"/Users/antonio/sites/react-test1/resources/js/components/layout/Body.react.js":[function(require,module,exports){
+"use strict";
+
+var _createClass = (function () {
+    function defineProperties(target, props) {
+        for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ('value' in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+        }
+    }return function (Constructor, protoProps, staticProps) {
+        if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+    };
+})();
+
+var _get = function get(_x, _x2, _x3) {
+    var _again = true;_function: while (_again) {
+        var object = _x,
+            property = _x2,
+            receiver = _x3;desc = parent = getter = undefined;_again = false;if (object === null) object = Function.prototype;var desc = Object.getOwnPropertyDescriptor(object, property);if (desc === undefined) {
+            var parent = Object.getPrototypeOf(object);if (parent === null) {
+                return undefined;
+            } else {
+                _x = parent;_x2 = property;_x3 = receiver;_again = true;continue _function;
+            }
+        } else if ('value' in desc) {
+            return desc.value;
+        } else {
+            var getter = desc.get;if (getter === undefined) {
+                return undefined;
+            }return getter.call(receiver);
+        }
+    }
+};
+
+function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+        throw new TypeError('Cannot call a class as a function');
+    }
+}
+
+function _inherits(subClass, superClass) {
+    if (typeof superClass !== 'function' && superClass !== null) {
+        throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
+    }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+}
+
+var BaseComponent = require('../BaseComponent.react');
+var Container = require('./Container.react');
+var Wrapper = require('./Wrapper.react');
+var FluxSlideMenu = require('../slideMenu/FluxSlideMenu.react');
+var LayoutStore = require('../../stores/LayoutStore');
+
+var Body = (function (_BaseComponent) {
+    _inherits(Body, _BaseComponent);
+
+    function Body(props) {
+        _classCallCheck(this, Body);
+
+        _get(Object.getPrototypeOf(Body.prototype), 'constructor', this).call(this, props);
+        this._bind('toggleContainerWrap', '_onChange');
+        LayoutStore.addChangeListener(this._onChange);
+        this.state = {
+            wrapped: false
+        };
+    }
+
+    _createClass(Body, [{
+        key: '_onChange',
+        value: function _onChange() {
+            this.setState({
+                wrapped: LayoutStore.getWrapped()
+            });
+        }
+    }, {
+        key: 'toggleContainerWrap',
+        value: function toggleContainerWrap() {
+            this.setState({
+                wrapped: this.state.wrapped ? false : true
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+
+            var container = this.state.wrapped ? React.createElement(Wrapper, null) : React.createElement(Container, null);
+
+            return React.createElement('div', { id: 'body-div' }, React.createElement(FluxSlideMenu, null), container);
+        }
+    }]);
+
+    return Body;
+})(BaseComponent);
+
+module.exports = Body;
+
+},{"../../stores/LayoutStore":"/Users/antonio/sites/react-test1/resources/js/stores/LayoutStore.js","../BaseComponent.react":"/Users/antonio/sites/react-test1/resources/js/components/BaseComponent.react.js","../slideMenu/FluxSlideMenu.react":"/Users/antonio/sites/react-test1/resources/js/components/slideMenu/FluxSlideMenu.react.js","./Container.react":"/Users/antonio/sites/react-test1/resources/js/components/layout/Container.react.js","./Wrapper.react":"/Users/antonio/sites/react-test1/resources/js/components/layout/Wrapper.react.js"}],"/Users/antonio/sites/react-test1/resources/js/components/layout/Container.react.js":[function(require,module,exports){
+"use strict";
+
+var _createClass = (function () {
+    function defineProperties(target, props) {
+        for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ('value' in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+        }
+    }return function (Constructor, protoProps, staticProps) {
+        if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+    };
+})();
+
+var _get = function get(_x, _x2, _x3) {
+    var _again = true;_function: while (_again) {
+        var object = _x,
+            property = _x2,
+            receiver = _x3;desc = parent = getter = undefined;_again = false;if (object === null) object = Function.prototype;var desc = Object.getOwnPropertyDescriptor(object, property);if (desc === undefined) {
+            var parent = Object.getPrototypeOf(object);if (parent === null) {
+                return undefined;
+            } else {
+                _x = parent;_x2 = property;_x3 = receiver;_again = true;continue _function;
+            }
+        } else if ('value' in desc) {
+            return desc.value;
+        } else {
+            var getter = desc.get;if (getter === undefined) {
+                return undefined;
+            }return getter.call(receiver);
+        }
+    }
+};
+
+function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+        throw new TypeError('Cannot call a class as a function');
+    }
+}
+
+function _inherits(subClass, superClass) {
+    if (typeof superClass !== 'function' && superClass !== null) {
+        throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
+    }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+}
+
+var BaseComponent = require('../BaseComponent.react');
+var FluxTweetApp = require('../FluxTweetApp.react');
+
+var Container = (function (_BaseComponent) {
+    _inherits(Container, _BaseComponent);
+
+    function Container(props) {
+        _classCallCheck(this, Container);
+
+        _get(Object.getPrototypeOf(Container.prototype), 'constructor', this).call(this, props);
+    }
+
+    _createClass(Container, [{
+        key: 'render',
+        value: function render() {
+            return React.createElement('div', { className: 'container' }, React.createElement(FluxTweetApp, null));
+        }
+    }]);
+
+    return Container;
+})(BaseComponent);
+
+module.exports = Container;
+
+},{"../BaseComponent.react":"/Users/antonio/sites/react-test1/resources/js/components/BaseComponent.react.js","../FluxTweetApp.react":"/Users/antonio/sites/react-test1/resources/js/components/FluxTweetApp.react.js"}],"/Users/antonio/sites/react-test1/resources/js/components/layout/MainHeader.react.js":[function(require,module,exports){
 'use strict';
 
 'strict mode';
@@ -42458,8 +42643,77 @@ var MainHeader = (function (_React$Component) {
 
 module.exports = MainHeader;
 
-},{"react":"/Users/antonio/sites/react-test1/node_modules/react/react.js"}],"/Users/antonio/sites/react-test1/resources/js/components/slideMenu/FluxSlideMenu.react.js":[function(require,module,exports){
-'use strict';
+},{"react":"/Users/antonio/sites/react-test1/node_modules/react/react.js"}],"/Users/antonio/sites/react-test1/resources/js/components/layout/Wrapper.react.js":[function(require,module,exports){
+"use strict";
+
+var _createClass = (function () {
+    function defineProperties(target, props) {
+        for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ('value' in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+        }
+    }return function (Constructor, protoProps, staticProps) {
+        if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+    };
+})();
+
+var _get = function get(_x, _x2, _x3) {
+    var _again = true;_function: while (_again) {
+        var object = _x,
+            property = _x2,
+            receiver = _x3;desc = parent = getter = undefined;_again = false;if (object === null) object = Function.prototype;var desc = Object.getOwnPropertyDescriptor(object, property);if (desc === undefined) {
+            var parent = Object.getPrototypeOf(object);if (parent === null) {
+                return undefined;
+            } else {
+                _x = parent;_x2 = property;_x3 = receiver;_again = true;continue _function;
+            }
+        } else if ('value' in desc) {
+            return desc.value;
+        } else {
+            var getter = desc.get;if (getter === undefined) {
+                return undefined;
+            }return getter.call(receiver);
+        }
+    }
+};
+
+function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+        throw new TypeError('Cannot call a class as a function');
+    }
+}
+
+function _inherits(subClass, superClass) {
+    if (typeof superClass !== 'function' && superClass !== null) {
+        throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
+    }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+}
+
+var BaseComponent = require('../BaseComponent.react');
+var Container = require('./Container.react');
+
+var Wrapper = (function (_BaseComponent) {
+    _inherits(Wrapper, _BaseComponent);
+
+    function Wrapper(props) {
+        _classCallCheck(this, Wrapper);
+
+        _get(Object.getPrototypeOf(Wrapper.prototype), 'constructor', this).call(this, props);
+    }
+
+    _createClass(Wrapper, [{
+        key: 'render',
+        value: function render() {
+            return React.createElement('div', { id: 'wrapper' }, React.createElement(Container, null));
+        }
+    }]);
+
+    return Wrapper;
+})(BaseComponent);
+
+module.exports = Wrapper;
+
+},{"../BaseComponent.react":"/Users/antonio/sites/react-test1/resources/js/components/BaseComponent.react.js","./Container.react":"/Users/antonio/sites/react-test1/resources/js/components/layout/Container.react.js"}],"/Users/antonio/sites/react-test1/resources/js/components/slideMenu/FluxSlideMenu.react.js":[function(require,module,exports){
+"use strict";
 
 var _createClass = (function () {
     function defineProperties(target, props) {
@@ -42506,6 +42760,8 @@ function _inherits(subClass, superClass) {
 var SlideMenuStore = require('../../stores/SlideMenuStore');
 var FluxSlideMenuLink = require('./FluxSlideMenuLink.react');
 var BaseComponent = require('../BaseComponent.react');
+//let Body = require('../layout/Body.react');
+var FluxLayoutActions = require('../../actions/FluxLayoutActions');
 
 var FluxSlideMenu = (function (_BaseComponent) {
     _inherits(FluxSlideMenu, _BaseComponent);
@@ -42522,6 +42778,11 @@ var FluxSlideMenu = (function (_BaseComponent) {
         key: 'componentDidMount',
         value: function componentDidMount() {
             SlideMenuStore.addChangeListener(this._onChange);
+        }
+    }, {
+        key: 'wrapContainer',
+        value: function wrapContainer() {
+            FluxLayoutActions.toggleContentWrap();
         }
     }, {
         key: '_onChange',
@@ -42542,7 +42803,7 @@ var FluxSlideMenu = (function (_BaseComponent) {
                 items.push(React.createElement(FluxSlideMenuLink, { selected: item.id == that.state.selected ? true : false, href: item.href, title: item.title }));
             });
 
-            return React.createElement('ul', { className: 'nav nav-pills nav-stacked' }, items);
+            return React.createElement('ul', { className: 'nav nav-pills nav-stacked' }, React.createElement('li', null, React.createElement('a', { className: 'btn btn-info', onClick: this.wrapContainer }, 'wrap with wrapper')), items);
         }
     }]);
 
@@ -42551,7 +42812,7 @@ var FluxSlideMenu = (function (_BaseComponent) {
 
 module.exports = FluxSlideMenu;
 
-},{"../../stores/SlideMenuStore":"/Users/antonio/sites/react-test1/resources/js/stores/SlideMenuStore.js","../BaseComponent.react":"/Users/antonio/sites/react-test1/resources/js/components/BaseComponent.react.js","./FluxSlideMenuLink.react":"/Users/antonio/sites/react-test1/resources/js/components/slideMenu/FluxSlideMenuLink.react.js"}],"/Users/antonio/sites/react-test1/resources/js/components/slideMenu/FluxSlideMenuLink.react.js":[function(require,module,exports){
+},{"../../actions/FluxLayoutActions":"/Users/antonio/sites/react-test1/resources/js/actions/FluxLayoutActions.js","../../stores/SlideMenuStore":"/Users/antonio/sites/react-test1/resources/js/stores/SlideMenuStore.js","../BaseComponent.react":"/Users/antonio/sites/react-test1/resources/js/components/BaseComponent.react.js","./FluxSlideMenuLink.react":"/Users/antonio/sites/react-test1/resources/js/components/slideMenu/FluxSlideMenuLink.react.js"}],"/Users/antonio/sites/react-test1/resources/js/components/slideMenu/FluxSlideMenuLink.react.js":[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () {
@@ -42625,7 +42886,17 @@ var FluxSlideMenuLink = (function (_React$Component) {
 
 module.exports = FluxSlideMenuLink;
 
-},{"../../actions/FluxSlideMenuActions":"/Users/antonio/sites/react-test1/resources/js/actions/FluxSlideMenuActions.js"}],"/Users/antonio/sites/react-test1/resources/js/constants/FluxSlideMenuConstants.js":[function(require,module,exports){
+},{"../../actions/FluxSlideMenuActions":"/Users/antonio/sites/react-test1/resources/js/actions/FluxSlideMenuActions.js"}],"/Users/antonio/sites/react-test1/resources/js/constants/FluxLayoutConstants.js":[function(require,module,exports){
+'use strict';
+
+var keyMirror = require('keymirror');
+
+module.exports = keyMirror({
+    WRAP_CONTENT: null, // wraps content with wrapper div
+    TOGGLE_CONTENT_WRAP: null // toggles content wrapper existence
+});
+
+},{"keymirror":"/Users/antonio/sites/react-test1/node_modules/keymirror/index.js"}],"/Users/antonio/sites/react-test1/resources/js/constants/FluxSlideMenuConstants.js":[function(require,module,exports){
 'use strict';
 
 var keyMirror = require('keymirror');
@@ -42670,13 +42941,68 @@ AppDispatcher.handleAction = function (action) {
 
 module.exports = AppDispatcher;
 
-},{"flux":"/Users/antonio/sites/react-test1/node_modules/flux/index.js"}],"/Users/antonio/sites/react-test1/resources/js/stores/SlideMenuStore.js":[function(require,module,exports){
+},{"flux":"/Users/antonio/sites/react-test1/node_modules/flux/index.js"}],"/Users/antonio/sites/react-test1/resources/js/stores/LayoutStore.js":[function(require,module,exports){
+"use strict";
+var _ = require('lodash');
+var AppDispatcher = require('../dispatcher/AppDispatcher');
+var EventEmitter = require('events').EventEmitter;
+var FluxLayoutConstants = require('../constants/FluxLayoutConstants');
+
+var _wrapped = undefined;
+
+function setWrapped(wrapped) {
+    _wrapped = wrapped;
+}
+function toggleWrapped() {
+    _wrapped = _wrapped ? false : true;
+}
+
+var LayoutStore = _.extend({}, EventEmitter.prototype, {
+
+    emitChange: function emitChange() {
+        this.emit('change');
+    },
+
+    addChangeListener: function addChangeListener(callback) {
+        this.on('change', callback);
+    },
+
+    removeChangeListener: function removeChangeListener(callback) {
+        this.removeListener('change', callback);
+    },
+
+    getWrapped: function getWrapped() {
+        return _wrapped;
+    }
+
+});
+
+AppDispatcher.register(function (payload) {
+    var action = payload.action;
+    switch (action.actionType) {
+        case FluxLayoutConstants.WRAP_CONTENT:
+            setWrapped(action.data);
+            break;
+        case FluxLayoutConstants.TOGGLE_CONTENT_WRAP:
+            toggleWrapped();
+            break;
+        default:
+            return true;
+
+    }
+    LayoutStore.emitChange();
+    return true;
+});
+
+module.exports = LayoutStore;
+
+},{"../constants/FluxLayoutConstants":"/Users/antonio/sites/react-test1/resources/js/constants/FluxLayoutConstants.js","../dispatcher/AppDispatcher":"/Users/antonio/sites/react-test1/resources/js/dispatcher/AppDispatcher.js","events":"/Users/antonio/sites/react-test1/node_modules/browserify/node_modules/events/events.js","lodash":"/Users/antonio/sites/react-test1/node_modules/lodash/index.js"}],"/Users/antonio/sites/react-test1/resources/js/stores/SlideMenuStore.js":[function(require,module,exports){
 'use strict';
 
+var _ = require('lodash');
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
 var FluxSlideMenuConstants = require('../constants/FluxSlideMenuConstants');
-var _ = require('lodash');
 
 var _items = {}; // the object of menu items
 var _visible = undefined; // bool, reflecting menu visibility

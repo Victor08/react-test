@@ -36,12 +36,13 @@ gulp.task('default',['public', 'less', 'js'], function () {
     browserSync({
         port: 8080,
         proxy: 'localhost:3000',
-        tunnel: true,
+        //tunnel: true,
         ui: {
             port: 8081
         }
     });
     gulp.watch(resources + '/less/**/*.less', ['less', browserSync.reload]);
+    gulp.watch('./views/**/*', [browserSync.reload]);
 });
 
 gulp.task('less', function () {

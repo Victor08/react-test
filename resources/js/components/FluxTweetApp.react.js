@@ -34,7 +34,6 @@ var FluxTweetApp = React.createClass({
             <div className="row">
                 <div className="col-sm-12">
                     <MainHeader text="wake up neo"/>
-                    <FluxSlideMenu />
                     <FluxTweetInput/>
                 { tweets }
                 </div>

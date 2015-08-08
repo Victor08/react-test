@@ -1,7 +1,7 @@
+let _ = require('lodash');
 let AppDispatcher = require('../dispatcher/AppDispatcher');
 let EventEmitter = require('events').EventEmitter;
 let FluxSlideMenuConstants = require('../constants/FluxSlideMenuConstants');
-let _ = require('lodash');
 
 let _items = {};    // the object of menu items
 let _visible;       // bool, reflecting menu visibility

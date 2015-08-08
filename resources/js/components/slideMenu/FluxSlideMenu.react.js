@@ -1,6 +1,9 @@
+"use strict";
 let SlideMenuStore = require('../../stores/SlideMenuStore');
 let FluxSlideMenuLink = require('./FluxSlideMenuLink.react');
 let BaseComponent = require('../BaseComponent.react');
+//let Body = require('../layout/Body.react');
+let FluxLayoutActions = require('../../actions/FluxLayoutActions');
 
 class FluxSlideMenu extends BaseComponent {
     constructor(props) {
@@ -11,6 +14,10 @@ class FluxSlideMenu extends BaseComponent {
 
     componentDidMount(){
         SlideMenuStore.addChangeListener(this._onChange);
+    }
+
+    wrapContainer(){
+        FluxLayoutActions.toggleContentWrap();
     }
 
     _onChange(){
@@ -33,6 +40,7 @@ class FluxSlideMenu extends BaseComponent {
 
         return (
             <ul className="nav nav-pills nav-stacked">
+                <li><a className="btn btn-info" onClick={this.wrapContainer}>wrap with wrapper</a></li>
                 {items}
             </ul>
         )
