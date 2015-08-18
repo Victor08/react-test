@@ -1,18 +1,30 @@
-"use strict";
 let BaseComponent = require('../BaseComponent.react');
 let FluxTweetApp = require('../FluxTweetApp.react');
 
 class Container extends BaseComponent {
     constructor(props){
         super(props);
+        this.state = {
+            slideMenuOpened: false
+        }
     }
 
     render(){
-        return(
-            <div className="container">
-                <FluxTweetApp/>
-            </div>
-        )
+        let container = (<div className="container">
+            <FluxTweetApp />
+        </div>);
+        if (this.state.slideMenuOpened) {
+            return (
+                <div id="wrapper">
+                    { container }
+                </div>
+            )
+        } else {
+            console.log('wtf', container);
+            return (
+                <div></div>
+            )
+        }
     }
 }
 

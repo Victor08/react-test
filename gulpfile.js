@@ -1,6 +1,3 @@
-/**
- * Plugins
- */
 var gulp            = require('gulp'),
     plumber         = require('gulp-plumber'),
     less            = require('gulp-less'),
@@ -16,21 +13,13 @@ var gulp            = require('gulp'),
     notify          = require('gulp-notify'),
     browserSync     = require('browser-sync');
 
-/**
- * Paths
- */
+
 var resources     = './resources',
     public_css    = './public/stylesheets',
     public_js     = './public/javascripts',
     public_vendor = './public/vendor';
 
 var browserifyOptions = _.assign({}, watchify.args, { entries: ['./resources/js/index.js'],debug: true, transform: ['babelify', 'reactify', 'envify']});
-
-
-
-/**
- * Tasks
- */
 
 gulp.task('default',['public', 'less', 'js'], function () {
     browserSync({
@@ -77,6 +66,7 @@ gulp.task('js', function(){
 
     function bundle(){
         return bundleStream.bundle()
+            .on('error', gutil.log.bind(gutil, 'Browserify Error'))
             .pipe(source('./index.js'))
             .pipe(buffer())
             .pipe(sourcemaps.init({loadMaps: true}))
