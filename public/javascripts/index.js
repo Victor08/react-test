@@ -4,18 +4,18 @@
 window.React = require('react');
 window.$ = require('jquery');
 window._ = require('lodash');
-var FluxTweetApp = require('./components/FluxTweetApp.react');
-
+//let FluxTweetApp = require('./components/FluxTweetApp.react');
+var Root = require('./components/layout/Root');
 var LayoutApi = require('./utils/LayoutApi');
 var TweetApi = require('./utils/TweetAPI');
 
 LayoutApi.getMenuItems();
 TweetApi.loadTweets();
-console.log('fdsdsdfsdffdsl');
-// Render FluxCartApp Controller View
-React.render(React.createElement(FluxTweetApp, null), document.getElementById('flux-tweets'));
 
-},{"./components/FluxTweetApp.react":"/home/vic/projects/react-test/resources/js/components/FluxTweetApp.react.js","./utils/LayoutApi":"/home/vic/projects/react-test/resources/js/utils/LayoutApi.js","./utils/TweetAPI":"/home/vic/projects/react-test/resources/js/utils/TweetAPI.js","jquery":"/home/vic/projects/react-test/node_modules/jquery/dist/jquery.js","lodash":"/home/vic/projects/react-test/node_modules/lodash/index.js","react":"/home/vic/projects/react-test/node_modules/react/react.js"}],"/home/vic/projects/react-test/node_modules/browserify/node_modules/events/events.js":[function(require,module,exports){
+// Render FluxCartApp Controller View
+React.render(React.createElement(Root, null), document.getElementById('flux-tweets'));
+
+},{"./components/layout/Root":"/home/vic/projects/react-test/resources/js/components/layout/Root.js","./utils/LayoutApi":"/home/vic/projects/react-test/resources/js/utils/LayoutApi.js","./utils/TweetAPI":"/home/vic/projects/react-test/resources/js/utils/TweetAPI.js","jquery":"/home/vic/projects/react-test/node_modules/jquery/dist/jquery.js","lodash":"/home/vic/projects/react-test/node_modules/lodash/index.js","react":"/home/vic/projects/react-test/node_modules/react/react.js"}],"/home/vic/projects/react-test/node_modules/browserify/node_modules/events/events.js":[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -42382,7 +42382,85 @@ var FluxTweetInput = React.createClass({
 
 module.exports = FluxTweetInput;
 
-},{"../actions/FluxTweetlistActions":"/home/vic/projects/react-test/resources/js/actions/FluxTweetlistActions.js","../utils/TweetAPI":"/home/vic/projects/react-test/resources/js/utils/TweetAPI.js","react":"/home/vic/projects/react-test/node_modules/react/react.js"}],"/home/vic/projects/react-test/resources/js/components/layout/MainHeader.react.js":[function(require,module,exports){
+},{"../actions/FluxTweetlistActions":"/home/vic/projects/react-test/resources/js/actions/FluxTweetlistActions.js","../utils/TweetAPI":"/home/vic/projects/react-test/resources/js/utils/TweetAPI.js","react":"/home/vic/projects/react-test/node_modules/react/react.js"}],"/home/vic/projects/react-test/resources/js/components/layout/Container.react.js":[function(require,module,exports){
+'use strict';
+
+var _createClass = (function () {
+    function defineProperties(target, props) {
+        for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ('value' in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+        }
+    }return function (Constructor, protoProps, staticProps) {
+        if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+    };
+})();
+
+var _get = function get(_x, _x2, _x3) {
+    var _again = true;_function: while (_again) {
+        var object = _x,
+            property = _x2,
+            receiver = _x3;desc = parent = getter = undefined;_again = false;if (object === null) object = Function.prototype;var desc = Object.getOwnPropertyDescriptor(object, property);if (desc === undefined) {
+            var parent = Object.getPrototypeOf(object);if (parent === null) {
+                return undefined;
+            } else {
+                _x = parent;_x2 = property;_x3 = receiver;_again = true;continue _function;
+            }
+        } else if ('value' in desc) {
+            return desc.value;
+        } else {
+            var getter = desc.get;if (getter === undefined) {
+                return undefined;
+            }return getter.call(receiver);
+        }
+    }
+};
+
+function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+        throw new TypeError('Cannot call a class as a function');
+    }
+}
+
+function _inherits(subClass, superClass) {
+    if (typeof superClass !== 'function' && superClass !== null) {
+        throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
+    }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) subClass.__proto__ = superClass;
+}
+
+var BaseComponent = require('../BaseComponent.react');
+var FluxTweetApp = require('../FluxTweetApp.react');
+
+var Container = (function (_BaseComponent) {
+    _inherits(Container, _BaseComponent);
+
+    function Container(props) {
+        _classCallCheck(this, Container);
+
+        _get(Object.getPrototypeOf(Container.prototype), 'constructor', this).call(this, props);
+        this.state = {
+            slideMenuOpened: false
+        };
+    }
+
+    _createClass(Container, [{
+        key: 'render',
+        value: function render() {
+            var container = React.createElement('div', { className: 'container' }, React.createElement(FluxTweetApp, null));
+            if (this.state.slideMenuOpened) {
+                return React.createElement('div', { id: 'wrapper' }, container);
+            } else {
+                console.log('wtf', container);
+                return React.createElement('div', null);
+            }
+        }
+    }]);
+
+    return Container;
+})(BaseComponent);
+
+module.exports = Container;
+
+},{"../BaseComponent.react":"/home/vic/projects/react-test/resources/js/components/BaseComponent.react.js","../FluxTweetApp.react":"/home/vic/projects/react-test/resources/js/components/FluxTweetApp.react.js"}],"/home/vic/projects/react-test/resources/js/components/layout/MainHeader.react.js":[function(require,module,exports){
 'use strict';
 
 'strict mode';
@@ -42458,7 +42536,81 @@ var MainHeader = (function (_React$Component) {
 
 module.exports = MainHeader;
 
-},{"react":"/home/vic/projects/react-test/node_modules/react/react.js"}],"/home/vic/projects/react-test/resources/js/components/slideMenu/FluxSlideMenu.react.js":[function(require,module,exports){
+},{"react":"/home/vic/projects/react-test/node_modules/react/react.js"}],"/home/vic/projects/react-test/resources/js/components/layout/Root.js":[function(require,module,exports){
+'use strict';
+
+var _createClass = (function () {
+    function defineProperties(target, props) {
+        for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ('value' in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+        }
+    }return function (Constructor, protoProps, staticProps) {
+        if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+    };
+})();
+
+var _get = function get(_x, _x2, _x3) {
+    var _again = true;_function: while (_again) {
+        var object = _x,
+            property = _x2,
+            receiver = _x3;desc = parent = getter = undefined;_again = false;if (object === null) object = Function.prototype;var desc = Object.getOwnPropertyDescriptor(object, property);if (desc === undefined) {
+            var parent = Object.getPrototypeOf(object);if (parent === null) {
+                return undefined;
+            } else {
+                _x = parent;_x2 = property;_x3 = receiver;_again = true;continue _function;
+            }
+        } else if ('value' in desc) {
+            return desc.value;
+        } else {
+            var getter = desc.get;if (getter === undefined) {
+                return undefined;
+            }return getter.call(receiver);
+        }
+    }
+};
+
+function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+        throw new TypeError('Cannot call a class as a function');
+    }
+}
+
+function _inherits(subClass, superClass) {
+    if (typeof superClass !== 'function' && superClass !== null) {
+        throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
+    }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) subClass.__proto__ = superClass;
+}
+
+var Container = require('./Container.react');
+var FluxSlideMenu = require('../slideMenu/FluxSlideMenu.react');
+var BaseComponent = require('../BaseComponent.react');
+var $ = require('jquery');
+
+var Root = (function (_BaseComponent) {
+    _inherits(Root, _BaseComponent);
+
+    function Root(props) {
+        _classCallCheck(this, Root);
+
+        _get(Object.getPrototypeOf(Root.prototype), 'constructor', this).call(this, props);
+    }
+
+    _createClass(Root, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {}
+    }, {
+        key: 'render',
+        value: function render() {
+            return React.createElement('body', null, React.createElement(FluxSlideMenu, null), React.createElement(Container, null));
+        }
+    }]);
+
+    return Root;
+})(BaseComponent);
+
+module.exports = Root;
+
+},{"../BaseComponent.react":"/home/vic/projects/react-test/resources/js/components/BaseComponent.react.js","../slideMenu/FluxSlideMenu.react":"/home/vic/projects/react-test/resources/js/components/slideMenu/FluxSlideMenu.react.js","./Container.react":"/home/vic/projects/react-test/resources/js/components/layout/Container.react.js","jquery":"/home/vic/projects/react-test/node_modules/jquery/dist/jquery.js"}],"/home/vic/projects/react-test/resources/js/components/slideMenu/FluxSlideMenu.react.js":[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () {
@@ -42542,7 +42694,7 @@ var FluxSlideMenu = (function (_BaseComponent) {
                 items.push(React.createElement(FluxSlideMenuLink, { selected: item.id == that.state.selected ? true : false, href: item.href, title: item.title }));
             });
 
-            return React.createElement('ul', { className: 'nav nav-pills nav-stacked' }, items);
+            return React.createElement('div', { id: 'slide-menu' }, React.createElement('ul', { className: 'nav nav-pills nav-stacked' }, items));
         }
     }]);
 

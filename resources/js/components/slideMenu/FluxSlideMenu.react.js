@@ -32,9 +32,11 @@ class FluxSlideMenu extends BaseComponent {
         });
 
         return (
-            <ul className="nav nav-pills nav-stacked">
-                {items}
-            </ul>
+            <div id="slide-menu">
+                <ul className="nav nav-pills nav-stacked">
+                    {items}
+                </ul>
+            </div>
         )
     }
 }

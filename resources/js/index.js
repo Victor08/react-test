@@ -1,16 +1,18 @@
 window.React = require('react');
 window.$ = require('jquery');
 window._ = require('lodash');
-var FluxTweetApp = require('./components/FluxTweetApp.react');
-
-var LayoutApi = require('./utils/LayoutApi');
-var TweetApi = require('./utils/TweetAPI');
+//let FluxTweetApp = require('./components/FluxTweetApp.react');
+let Root = require('./components/layout/Root');
+let LayoutApi = require('./utils/LayoutApi');
+let TweetApi = require('./utils/TweetAPI');
 
 LayoutApi.getMenuItems();
 TweetApi.loadTweets();
-console.log('fdsdsdfsdffdsl');
+
 // Render FluxCartApp Controller View
 React.render(
-    <FluxTweetApp />,
+    <Root/>
+    ,
     document.getElementById('flux-tweets')
 );
+
