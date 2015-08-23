@@ -16,6 +16,7 @@
     "browserify": "~6.2.0",
     "envify": "~3.0.0",
     "gulp": "*",
+    "gulp-csscomb": "^3.0.6",
     "gulp-less": "*",
     "gulp-notify": "^2.2.0",
     "gulp-plumber": "*",

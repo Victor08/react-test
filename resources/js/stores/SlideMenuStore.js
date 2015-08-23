@@ -8,6 +8,17 @@ let _visible;       // bool, reflecting menu visibility
 let _selected = 0;      // selected item id
 
 function switchVisibility(bool) {
+    // if no payload, just toggle _visible
+    if (_.isUndefined(bool)){
+        if (_visible) {
+            _visible = false;
+            return false;
+        } else {
+            _visible = true;
+            return true;
+        }
+    }
+    // if payload is supplied, make sure to set certain visibility
     if (bool) {
         _visible = true;
         return true;
@@ -43,8 +54,16 @@ let SlideMenuStore = _.extend({}, EventEmitter.prototype, {
         this.emit('change');
     },
 
+    emitCustomEvent: function(event){
+        this.emit(event);
+    },
+
     addChangeListener: function(callback) {
         this.on('change', callback);
+    },
+
+    addCustomEventListener: function(event, callback) {
+        this.on('event', callback);
     },
 
     removeChangeListener: function(callback) {

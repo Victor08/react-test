@@ -3,58 +3,62 @@
 }
 
 @header-bar-space: 19px;
-@main-content-bg: #fff;
+@main-content-bg: #FFF;
 @slide-menu-width: 280px;
 @fo-mobile-breakpoint: @grid-float-breakpoint;
 @top-bar-space: 19px;
 @bottom-bar-space: 140px;
-@fo-layout-default-transition: .2s cubic-bezier(0.23, 1, 0.32, 1);
+@fo-layout-default-transition: .2s cubic-bezier(.23, 1, .32, 1);
 
 html {
-  margin:0;
-  padding:0;
-  min-height:100%;
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
   position: relative;
   -webkit-overflow-scrolling: touch;
 }
 
 body {
-  margin:0;
-  padding:0;
-  height:100%;
+  margin: 0;
+  padding: 0;
+  height: 100%;
   width: 100%;
-
   padding-bottom: @bottom-bar-space;
   padding-top: @header-bar-space;
 
-  @media (max-width: @screen-sm){
+  @media (max-width: @screen-sm) {
     padding-bottom: @bottom-bar-space + 70;
   }
 
   -webkit-overflow-scrolling: touch;
-
   -webkit-font-smoothing: subpixel-antialiased !important;
-
   -webkit-backface-visibility: hidden;
-  -moz-backface-visibility:    hidden;
-  -ms-backface-visibility:     hidden;
+     -moz-backface-visibility: hidden;
+      -ms-backface-visibility: hidden;
 }
 
 #wrapper {
-  min-height:100%;
+  min-height: 100%;
   position: relative;
-
+  left: @slide-menu-width;
   top: 0;
   padding-bottom: @bottom-bar-space;
-  @media (max-width: @screen-sm){
-    padding-bottom:  @bottom-bar-space + 70;
+  @media (max-width: @screen-sm) {
+    padding-bottom: @bottom-bar-space + 70;
   }
 
   z-index: 1;
-
   -webkit-overflow-scrolling: touch;
   transition: left @fo-layout-default-transition;
 }
+//.wrapper-appear {
+//  left: 0;
+//  transition: left @fo-layout-default-transition
+//}
+//.wrapper-appear.wrapper-appear-active {
+//  left: @slide-menu-width;
+//}
+
 
 #main-content.container {
   background-color: @main-content-bg;
@@ -62,14 +66,8 @@ body {
   position: relative;
 }
 
-
-
-
-
-
-
 #slide-menu {
-  position:fixed;
+  position: fixed;
   top: 0;
   left: -@slide-menu-width;
   border-right: 1px solid @gray-light;
@@ -78,13 +76,13 @@ body {
   overflow-y: auto;
   background-color: @main-content-bg;
   z-index: 5;
-  font-size: ceil((@font-size-base * 1.25));
+  font-size: ceil(@font-size-base * 1.25);
 
   [data-slide-menu-heading] {
     font-weight: bold;
     border-top: 1px solid @gray-light;
     padding: 15px 5px;
-    font-size: ceil((@font-size-base * 1.5));
+    font-size: ceil(@font-size-base * 1.5);
   }
   [data-slide-menu-item] > a {
     padding: 10px 10px 10px 20px;
@@ -94,23 +92,22 @@ body {
   transition: left @fo-layout-default-transition;
 }
 
+#slide-menu.slide-menu-shown {
+  left: 0;
+}
+
 #overlay {
   z-index: 1000;
   display: block;
   background: black;
-  opacity: 0;
-  position: absolute;
   left: 0;
   right: 0;
-  top: -@top-bar-space;
   bottom: -@bottom-bar-space - 30;
   @media (min-width: @fo-mobile-breakpoint) {
     bottom: -@bottom-bar-space - 30;
   }
   transition: opacity @fo-layout-default-transition;
+  top: -@top-bar-space;
+  position: absolute;
+  opacity: 0;
 }
-
-
-
-
-

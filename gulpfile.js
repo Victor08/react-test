@@ -11,17 +11,23 @@ var gulp            = require('gulp'),
     buffer          = require('vinyl-buffer'),
     gutil           = require('gulp-util'),
     notify          = require('gulp-notify'),
-    browserSync     = require('browser-sync');
+    browserSync     = require('browser-sync'),
+    csscomb         = require('gulp-csscomb');
 
-
+// paths config
 var resources     = './resources',
     public_css    = './public/stylesheets',
     public_js     = './public/javascripts',
     public_vendor = './public/vendor';
 
-var browserifyOptions = _.assign({}, watchify.args, { entries: ['./resources/js/index.js'],debug: true, transform: ['babelify', 'reactify', 'envify']});
+//browserify config
+var browserifyOptions = _.assign({}, watchify.args, {
+    entries: ['./resources/js/index.js'],
+    debug: true,
+    transform: ['babelify', 'reactify', 'envify']
+});
 
-gulp.task('default',['public', 'less', 'js'], function () {
+gulp.task('default',['publish', 'less', 'js'], function () {
     browserSync({
         port: 8080,
         proxy: 'localhost:3000',
@@ -35,6 +41,11 @@ gulp.task('default',['public', 'less', 'js'], function () {
 });
 
 gulp.task('less', function () {
+
+
+
+
+
     return gulp.src(resources + '/less/react-test.less')
         .pipe(plumber())
         .pipe(sourcemaps.init())
@@ -43,7 +54,16 @@ gulp.task('less', function () {
         .pipe(gulp.dest(public_css));
 });
 
-gulp.task('public', function () {
+gulp.task('csscomb', function() {
+    return gulp.src(resources + '/less/*.less')
+        .pipe(csscomb())
+        .pipe(gulp.dest(resources + '/less/'));
+
+    //return gulp.src([resources + '/less/*.less'])
+    //    .pipe(csscomb());
+});
+
+gulp.task('publish', function () {
     var config = require('./bower.json')
         , bowerrc = JSON.parse(fs.readFileSync('./.bowerrc'));
 
