@@ -6,7 +6,11 @@ class FluxSlideMenu extends BaseComponent {
     constructor(props) {
         super(props);
         this._bind('_onChange', 'render');
-        this.state = { items: SlideMenuStore.getItems(), selected: '0' }
+        this.state = {
+            items: SlideMenuStore.getItems(),
+            selected: '0',
+            visible: SlideMenuStore.getVisible()
+        }
     }
 
     componentDidMount(){
@@ -16,23 +20,26 @@ class FluxSlideMenu extends BaseComponent {
     _onChange(){
         this.setState({
             items: SlideMenuStore.getItems(),
-            selected: SlideMenuStore.getSelected()
+            selected: SlideMenuStore.getSelected(),
+            visible: SlideMenuStore.getVisible()
         })
     }
 
     render() {
-        console.log('rendering slide menu');
-        var that = this;
-        let items = [];
+
+        let items = []; // menu items to render
+        let classes = ''; // string of css classes for slide menu div
+
+        this.state.visible ? classes += 'slide-menu-shown' : false;
 
         _.each(this.state.items, function(item, key) {
             items.push(
-                <FluxSlideMenuLink selected={item.id == that.state.selected ? true : false} href={ item.href } title={ item.title } />
+                <FluxSlideMenuLink selected={item.id == this.state.selected ? true : false} href={ item.href } title={ item.title } />
             )
-        });
+        }.bind(this));
 
         return (
-            <div id="slide-menu">
+            <div id="slide-menu" className={classes}>
                 <ul className="nav nav-pills nav-stacked">
                     {items}
                 </ul>

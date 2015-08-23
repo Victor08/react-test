@@ -1,12 +1,12 @@
 var React = require('react');
 var TweetStore = require('../stores/TweetStore');
-var SlideMenuStore = require('../stores/SlideMenuStore');
+//var SlideMenuStore = require('../stores/SlideMenuStore');
 var FluxTweetInput = require('./FluxTweetInput.react');
 var FluxTweet = require('./FluxTweet.react');
-var TweetApi = require('../utils/TweetAPI');
-var LayoutApi = require('../utils/LayoutApi');
+//var TweetApi = require('../utils/TweetAPI');
+//var LayoutApi = require('../utils/LayoutApi');
 var MainHeader = require('./layout/MainHeader.react');
-var FluxSlideMenu = require('./slideMenu/FluxSlideMenu.react');
+
 
 
 function getTweetsState() {
@@ -34,9 +34,8 @@ var FluxTweetApp = React.createClass({
             <div className="row">
                 <div className="col-sm-12">
                     <MainHeader text="wake up neo"/>
-                    <FluxSlideMenu />
                     <FluxTweetInput/>
-                { tweets }
+                    { tweets }
                 </div>
             </div>
         )

@@ -20,8 +20,11 @@
   },
   "public": {
     "react": [
-      "react.min.js",
+      "react-with-addons.min.js",
       "JSXTransformer.js"
+    ],
+    "bootstrap": [
+      "fonts/*"
     ]
   }
 }
