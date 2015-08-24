@@ -5,5 +5,6 @@ npm-debug.log
 */**/vendor/
 vendor/
 public/javascripts/
+public/stylesheets/
 .idea
 .DS_Store
